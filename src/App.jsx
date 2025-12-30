@@ -15,7 +15,7 @@ const App = () => {
     <BrowserRouter>
     <Provider store={store}>
     <Routes>
-      <Route path="/home" element={<Home />}/>
+      <Route path="/" element={<Home />}/>
       <Route path="/new-customer" element={ <NewCustomer /> } />
     </Routes>
     </Provider>

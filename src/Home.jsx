@@ -1,35 +1,19 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import 'remixicon/fonts/remixicon.css'
+import { deleteCustomer } from "./redux/slices/customer";
+
 
 const Home = () => {
 
-  const data = [
-    {
-      customerName:"Aman",
-      product:"book",
-      price:50,
-      discount:10
-    },
-     {
-      customerName:"Raj",
-      product:"book",
-      price:50,
-      discount:10
-    },
-     {
-      customerName:"Ram",
-      product:"book",
-      price:50,
-      discount:10
-    },
-     {
-      customerName:"Kamal",
-      product:"book",
-      price:50,
-      discount:10
-    }
-  ]
+ const {customerSlice} = useSelector(res=>res)   //used to retrive stored data by redux
+
+ const dispatch = useDispatch()
+
+ const deleteCustomerList = (index)=>{
+  dispatch(deleteCustomer(index))
+ }
 
   return(
     <div className="bg-gray-200 min-h-screen py-16">
@@ -54,20 +38,20 @@ const Home = () => {
         </thead>
         <tbody>
         { 
-        data.map((item,index)=>(
+        customerSlice.map((item,index)=>(
 
           <tr key={index} className={index % 2 === 1 ? 'bg-rose-50':'bg-white'}>
             <td className="py-3 pl-3">{index+1}</td>
-            <td>{item.customerName}</td>
-            <td>{item.product}</td>
-            <td>{item.price}</td>
+            <td>{item.customer_name}</td>
+            <td>{item.product_name}</td>
+            <td>{item.price_name}</td>
             <td>{item.discount}</td>
             <td>
               <div className="space-x-3">
                 <button className="bg-indigo-600 rounded w-10 h-10">
                  <i className="ri-pencil-line text-white"></i>
                 </button>
-                 <button className="bg-rose-600 rounded w-10 h-10">
+                 <button onClick={()=>deleteCustomerList(index)} className="bg-rose-600 rounded w-10 h-10">
                  <i className="ri-delete-bin-line text-white"></i>
                 </button>
               </div>
